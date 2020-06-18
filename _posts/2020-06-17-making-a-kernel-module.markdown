@@ -5,9 +5,9 @@ date:   2020-06-17 20:20:00 -0400
 categories: jekyll update
 ---
 
-The Linux kernel is considered to be monolithic in design, however much of its functionality is implemented as kernel modules which can typically be loaded and unloaded on demand without requiring a reboot. Writing kernel modules requirs compiling against kernel headers, which in turn often requires frequent recompilation or even source code updates when maintaining out-of-tree modules due to the kernel's unstable API. Writing kernel modules may seem daunting at first, but once the conventions are understood it can actually be fairly straightforward.
+The Linux kernel is considered to be monolithic in design, however much of its functionality is implemented as kernel modules which can typically be loaded and unloaded on demand without rebooting. Writing kernel modules requires compiling against kernel headers, which in turn often requires frequent recompilation or even source code updates when maintaining out-of-tree modules due to the kernel's unstable API. 
 
-This post shall serve as a starting point by using standard kernel interfaces to create the simplest possible example module. 
+Writing kernel modules may seem daunting at first, but once the conventions are understood it can actually be fairly straightforward. This post shall serve as a starting point by using standard kernel interfaces to create the simplest possible example module that can be loaded onto a modern Linux distribution. 
 
 To get started, first install some basic development tools and libraries: 
 
@@ -82,3 +82,14 @@ retpoline:      Y
 name:           kmodhello
 vermagic:       5.6.18-300.fc32.x86_64 SMP mod_unload 
 ```
+
+Fedora's Linux kernel configuration has some confinement enabled which prevents unsigned module loading:
+
+```
+$ sudo insmod kmodhello.ko
+insmod: ERROR: could not qinsert module kmodhello.ko: Operation not permitted
+$ journalctl --boot --dmesg | grep insmod
+Jun 17 23:14:48 joshua-laptop kernel: Lockdown: insmod: unsigned module loading is restricted; see man kernel_lockdown.7
+```
+
+Disabling the loading of arbitrary modules makes some sense from a security standpoint, however it is an inconvenience as the module must now be signed with our own keys.
