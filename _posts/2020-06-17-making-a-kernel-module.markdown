@@ -61,7 +61,7 @@ The kernel module should now be able to be built with **make**:
 
 ```
 $ make
-make -C /lib/modules/5.6.18-300.fc32.x86_64/build M=/home/jstone/Projects/kernel-module-hello/kernel-module-demo modules
+make -C /lib/modules/5.6.18-300.fc32.x86_64/build M=/home/jstone/Projects/kernel-module-demo modules
 make[1]: Entering directory '/usr/src/kernels/5.6.18-300.fc32.x86_64'
   MODPOST 1 modules
 make[1]: Leaving directory '/usr/src/kernels/5.6.18-300.fc32.x86_64'
@@ -71,7 +71,7 @@ Next, verify that the module has the proper information:
 
 ```
 $ modinfo kmodhello.ko
-filename:       kmodhello.ko
+filename:       /home/jstone/Projects/kernel-module-hello/kmodhello.ko
 version:        0.1
 description:    Hello World kernel module
 author:         Joshua Stone
