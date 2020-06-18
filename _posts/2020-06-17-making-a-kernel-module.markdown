@@ -71,7 +71,7 @@ Next, verify that the module has the proper information:
 
 ```
 $ modinfo kmodhello.ko
-filename:       /home/jstone/Projects/kernel-module-hello/kmodhello.ko
+filename:       /home/jstone/Projects/kernel-module-demo/kmodhello.ko
 version:        0.1
 description:    Hello World kernel module
 author:         Joshua Stone
