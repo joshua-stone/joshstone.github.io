@@ -5,7 +5,7 @@ date:   2020-06-17 20:20:00 -0400
 categories: jekyll update
 ---
 
-The Linux kernel is considered to be monolithic in design, however much of its functionality is implemented as kernel modules which can typically be loaded and unloaded on demand without requiring a reboot. Writing kernel modules requires targetting th kernel headers, which often requires updating if maintaining out-of-tree modules due to the kernel's unstable API. This can seem daunting at first, but once the conventions are understood can actually be fairly straightforward.
+The Linux kernel is considered to be monolithic in design, however much of its functionality is implemented as kernel modules which can typically be loaded and unloaded on demand without requiring a reboot. Writing kernel modules requirs compiling against kernel headers, which in turn often requires frequent recompilation or even source code updates when maintaining out-of-tree modules due to the kernel's unstable API. This can seem daunting at first, but once the conventions are understood can actually be fairly straightforward.
 
 This post shall serve as a starting point by using standard kernel interfaces to create the simplest possible example module. 
 
