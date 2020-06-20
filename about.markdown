@@ -4,15 +4,8 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+Joshua Stone is an active member of the FOSS community, working on various projects in Python, Ruby, C, Rust, Bash, and Assembly.
 
 
-[jekyll-organization]: https://github.com/jekyll
+{% include image.html url="/assets/image/logo.png" description="Site logo, made by the love of my life, Liv!" %}
