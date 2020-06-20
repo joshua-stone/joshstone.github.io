@@ -208,7 +208,7 @@ string_mask = utf8only
 [ req_distinguished_name ]
 O = Test Organization
 CN = Test signing key
-emailAddress = joshua.gage.stone@gmail.com
+emailAddress = test@gmail.com
 EOF
 ```
 
