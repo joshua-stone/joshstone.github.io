@@ -183,7 +183,7 @@ vermagic:       5.6.18-300.fc32.x86_64 SMP mod_unload
 ```
 
 # Signing a kernel module:
-Fedora's kernel has the Lockdown feature enabled to prevent untrusted modules from being loaded:
+Fedora's kernel has the [Lockdown feature](https://kernelnewbies.org/Linux_5.4#Kernel_lockdown_mode) enabled to prevent untrusted modules from being loaded:
 
 ```
 $ sudo insmod kmodhello.ko
@@ -215,16 +215,16 @@ EOF
 With a signing config, it's now possible to generate a signing key pair:
 
 ```
-openssl req -new \
-            -nodes \
-            -utf8 \
-            -sha256 \
-            -days 36500 \
-            -batch \
-            -x509 \
-            -outform PEM \
-            -out certs/kernel_key.crt \
-            -keyout certs/kernel_key.priv
+$ openssl req -new \
+              -nodes \
+              -utf8 \
+              -sha256 \
+              -days 36500 \
+              -batch \
+              -x509 \
+              -outform PEM \
+              -out certs/kernel_key.crt \
+              -keyout certs/kernel_key.priv
 ```
 
 After the keys have been generated, the kernel module can now be signed:
