@@ -37,8 +37,14 @@ url --url="https://download.fedoraproject.org/pub/fedora/linux/releases/32/Every
 
 %packages
 # Base Fedora image
-@^workstation-product-environment
-# extra packages
+@^minimal-environment
+gnome-session-wayland-session
+spice-vdagent
+tilix
+gedit
+vim
+firefox
+# Kernel development packages
 gcc
 kernel-devel
 kernel-headers
@@ -93,32 +99,32 @@ reboot
 Once the Kickstart file is made, it's time to start the new VM:
 
 ```
-sudo virt-install --name f32-kmod \
-                  --memory 4096 \
-                  --vcpus 2 \
-                  --os-variant fedora32 \
-                  --boot hd,cdrom,loader=/usr/share/edk2/ovmf/OVMF_CODE.secboot.fd,loader_ro=yes,loader_type=pflash,nvram=/usr/share/edk2/ovmf/OVMF_VARS.secboot.fd \
-                  --disk size=20 \
-                  --location https://download.fedoraproject.org/pub/fedora/linux/releases/32/Everything/x86_64/os \
-                  --initrd-inject=kickstart.cfg \
-                  --extra-args="ks=file:/kickstart.cfg"
+$ cp /usr/share/edk2/ovmf/OVMF_VARS.secboot.fd . # virt-install needs OVMF_VARS.secboot.fd to be writable
+$ sudo virt-install --name f32-kmod \
+                    --memory 4096 \
+                    --vcpus 2 \
+                    --os-variant fedora32 \
+                    --boot hd,cdrom,loader=/usr/share/edk2/ovmf/OVMF_CODE.secboot.fd,loader_ro=yes,loader_type=pflash,nvram=OVMF_VARS.secboot.fd \
+                    --disk size=20 \
+                    --location https://download.fedoraproject.org/pub/fedora/linux/releases/32/Everything/x86_64/os \
+                    --initrd-inject=kickstart.cfg \
+                    --extra-args="ks=file:/kickstart.cfg"
 ```
 
-The installer usually completes and reboots into a new system after about 20 minutes, depending on the hardware and download mirror speeds. All steps from this point forward can now be completed inside the new Fedora VM.
+The installer usually completes and reboots into a new system after about 15 minutes, depending on the hardware and download mirror speeds. All steps from this point forward can now be completed inside the new Fedora VM.
 
 # Building a kernel module:
 
 To get started, first ensure that basic development tools and libraries are already installed:
 
 ```
-$ sudo dnf install gcc make kernel-headers kernel-devel
+$ sudo dnf install gcc kernel-devel kernel-headers make mokutil
 ```
 
 Next, create a simple kernel module stub named **kmodhello.c**:
 
 {% highlight c %}
 #include <linux/module.h>
-#include <linux/kernel.h>
 #include <linux/init.h>
 
 static int __init hello_start(void)
@@ -160,7 +166,7 @@ The kernel module should now be able to be built with **make**:
 
 ```
 $ make
-make -C /lib/modules/5.6.18-300.fc32.x86_64/build M=/home/jstone/Projects/kernel-module-demo modules
+make -C /lib/modules/5.6.18-300.fc32.x86_64/build M=/home/user/kernel-module-demo modules
 make[1]: Entering directory '/usr/src/kernels/5.6.18-300.fc32.x86_64'
   MODPOST 1 modules
 make[1]: Leaving directory '/usr/src/kernels/5.6.18-300.fc32.x86_64'
@@ -170,7 +176,7 @@ Next, verify that the module has the proper information:
 
 ```
 $ modinfo kmodhello.ko
-filename:       /home/jstone/Projects/kernel-module-demo/kmodhello.ko
+filename:       /home/user/kernel-module-demo/kmodhello.ko
 version:        0.1
 description:    Hello World kernel module
 author:         Joshua Stone
@@ -189,7 +195,7 @@ Fedora's kernel has the [Lockdown feature](https://kernelnewbies.org/Linux_5.4#K
 $ sudo insmod kmodhello.ko
 insmod: ERROR: could not insert module kmodhello.ko: Operation not permitted
 $ journalctl --boot --dmesg | grep insmod
-Jun 17 23:14:48 joshua-laptop kernel: Lockdown: insmod: unsigned module loading is restricted; see man kernel_lockdown.7
+Jun 17 23:14:48 developmentvm.localdomain kernel: Lockdown: insmod: unsigned module loading is restricted; see man kernel_lockdown.7
 ```
 
 Disabling the loading of arbitrary modules makes some sense from a security standpoint; however, it is an inconvenience as the module must now be signed with self-generated keys.
@@ -235,7 +241,7 @@ $ /usr/src/kernels/$(uname -r)/scripts/sign-file sha512 \
                                                  certs/kernel_key.crt \
                                                  kmodhello.ko
 $ modinfo kmodhello.ko
-filename:       /home/jstone/Projects/kernel-module-demo/kmodhello.ko
+filename:       /home/user/kernel-module-demo/kmodhello.ko
 version:        0.1
 description:    Hello World kernel module
 author:         Joshua Stone
