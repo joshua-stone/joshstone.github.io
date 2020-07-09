@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Josh's Blog
+title: Technically a Blog
 description: >-
   Welcome to my blog! Here I write about my experiences in various personal projects.
 baseurl:         ""
