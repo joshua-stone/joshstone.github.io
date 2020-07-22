@@ -19,7 +19,7 @@ For extra points, I've tested how rigid the lid is while shaking the laptop in m
 
 # Ports:
 
-The number of ports is quite good compared to other ultrathin laptops like the Dell XPS 13 and Macbook. Two USB-C ports are available which are its main method of charging (very useful for sharing cables too). There are two also standard USB-A ports, as well as an HDMI port and headphone jack. There isn't native ethernet which is a bit of a disappointment, but fortunately this is mitigated with a dongle that comes with the laptop. There isn't an SD card slot or even a microSD slot either, but the SD card reader dongle I already use with my desktop can be used instead. 
+The number of ports is quite good compared to other ultrathin laptops like the Dell XPS 13 and Macbook. Two USB-C ports are available which are its main method of charging (very useful for sharing cables too). There are also two standard USB-A ports, as well as an HDMI port and headphone jack. There isn't native ethernet which is a bit of a disappointment, but fortunately this is mitigated with a dongle that comes with the laptop. There isn't an SD card slot or even a microSD slot either, but the SD card reader dongle I already use with my desktop can be used instead. 
 
 # Monitor:
 
@@ -31,9 +31,9 @@ Thinkpads are well renowned for their keyboards, and the keyboard on the Carbon 
 
 # Speakers:
 
-I'm quite happy with the quality of the Dolby Atmos speakers. Usually laptop speakers are a disappointment to me, but the speakers on the Carbon are more than capable of handling different genres of music. The speaker alignment being upward-facing instead of side-facing as seen in other thinkpads also makes it better for watching videos and listening to music with other people. 
+I'm quite happy with the quality of the Dolby Atmos speakers. Usually laptop speakers are a disappointment to me, but the speakers on the Carbon are more than capable of handling different genres of music. The quad-speaker configuration being upward-facing and downward-facing instead of side-facing as seen in other thinkpads also makes it better for watching videos and listening to music with other people. 
 
-It does seem a bit lacking in [bass-heavy music](https://www.youtube.com/watch?v=qgRr0CLFhaw), but the built-in
+The speakers seem a bit lacking in [bass-heavy music](https://www.youtube.com/watch?v=qgRr0CLFhaw), but the built-in
 DAC is more than capable of driving a pair of [good-quality headphones](https://www.amazon.com/Audio-Technica-ATH-M50xBT-Wireless-Bluetooth-Headphones/dp/B07HKVCVSY/). I might have to make an update on this later because Dolby Atmos support on Linux appears to be a work in progress and may need a preset to have it more closely match the speaker output on [Windows](https://github.com/JackHack96/PulseEffects-Presets/tree/master/irs) in the meantime.
 
 # Battery:
